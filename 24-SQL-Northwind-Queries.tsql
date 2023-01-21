@@ -49,14 +49,14 @@ where year(getdate()) - year(BirthDate) > 35
 order by LastName desc
 
 
--- 9 -- Show each employee’s name, the product name for the products that he has sold and quantity that he has sold.
+-- 9 -- Show each employeeâ€™s name, the product name for the products that he has sold and quantity that he has sold.
 select FirstName, LastName, ProductName, Quantity
 from Employees E, Orders O, [Order Details] OD, Products P
 where E.EmployeeID = O.EmployeeID and
 O.OrderID = OD.OrderID and
 OD.ProductID = P.ProductID
 
--- 10 -- Show for each order item – the customer name and order id, product name, ordered quantity, product price and total price (Ordered quantity * product price) and gap between ordered date and shipped date (the gap in days). Order by order id.
+-- 10 -- Show for each order item â€“ the customer name and order id, product name, ordered quantity, product price and total price (Ordered quantity * product price) and gap between ordered date and shipped date (the gap in days). Order by order id.
 select ContactName, O.OrderID, ProductName, Quantity 'Ordered Quantity', OD.UnitPrice 'Product Price', Quantity * OD.UnitPrice 'Total Price', day(ShippedDate) - day(OrderDate) 'Gap In Days'
 from Customers C, Orders O, [Order Details] OD, Products P
 where C.CustomerID = O.CustomerID and
@@ -95,7 +95,7 @@ group by P.ProductID, ProductName, P.UnitsInStock, P.UnitPrice
 having sum(OD.Quantity) > 500
 order by ProductName
 
--- 16 -- For each employee display the total price paid on all of his orders that hasn’t shipped yet.
+-- 16 -- For each employee display the total price paid on all of his orders that hasnâ€™t shipped yet.
 select E.EmployeeID, E.FirstName, round(sum((OD.Quantity * OD.UnitPrice)*(1-Discount)),2) 'Total Price Paid'
 from Employees E, Orders O, [Order Details] OD
 where E.EmployeeID = O.EmployeeID and OD.OrderID = O.OrderID and ShippedDate is null
